@@ -1,0 +1,171 @@
+ {%extends "base.html" %}
+    {%block title%}Create Event | EventManager360{%endblock%}
+{%block content%}
+    <style>
+        body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f06, #ffba00);
+
+}
+.big-box{
+    margin:50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height:100vh;
+    align-items: center;}
+.logo-img {
+    width: 50px; /* Adjust logo size */
+    height: auto;
+    margin-right: 10px; /* Space between logo and text */
+}
+
+.logo-text {
+    font-size: 24px; /* Text size */
+    font-weight: bold;
+    color: #333; /* Text color */
+}
+
+.event-creator-container {
+    background-color: #fff; /* Background color for form container */
+    padding: 30px; /* Padding inside the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    width: 600px; /* Width of the container */
+    max-width: 90%; /* Maximum width */
+    text-align: center;
+}
+
+.event-creator-form h2 {
+    margin-bottom: 20px; /* Space below form header */
+    color: #333; /* Text color */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Space between form groups */
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px; /* Space below labels */
+    color: #333; /* Text color */
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 12px; /* Padding inside input fields */
+    font-size: 16px; /* Text size */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    outline: none;
+    border-color: #ffba00; /* Border color on focus */
+}
+
+.button {
+    background-color: #ffba00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    padding: 12px 24px; /* Padding inside button */
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Text size */
+    transition: background-color 0.3s ease, border 0.2s ease; /* Smooth transitions */
+}
+
+.button:hover {
+    background-color:#ffba00; /* Button background color on hover */
+    border: 2px solid black; /* Border on hover */
+}
+.success-message {
+    background-color: #dff0d8; /* Light green background for success */
+    color:#ffba00; /* Dark green text for success */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.success-message h2 {
+    margin-bottom: 10px;
+}
+
+.success-message p {
+    margin: 0;
+}
+
+    </style>
+</head>
+<body>
+<div class="big-box">
+    <div class="event-creator-container">
+        <form id="event-creator-form" class="event-creator-form" action="/eventcreate" method="POST">
+            <img src="static/assets/logo.png" class="logo-img" alt="EventManager360 Logo"><br>
+           <h1> <class class="logo-text">EventManager360</class></h1> 
+            <h2>Create Event</h2>
+            <div class="form-group">
+                <label for="event-name">Event Name</label>
+                <input type="text" id="event-name" name="event-name" placeholder="Enter event name" required>
+            </div>
+            <div class="form-group">
+                <label for="event-date">Event Date</label>
+                <input type="date" id="event-date" name="event-date" required>
+            </div>
+            <div class="form-group">
+                <label for="event-time">Event Time</label>
+                <input type="time" id="event-time" name="event-time" required>
+            </div>
+            <div class="form-group">
+                <label for="event-location">Event Location</label>
+                <input type="text" id="event-location" name="event-location" placeholder="Enter event location" required>
+            </div>
+            <div class="form-group">
+                <label for="event-description">Event Description</label>
+                <textarea id="event-description" name="event-description" placeholder="Enter event description" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="event-organizer">Event Organizer</label>
+                <input type="text" id="event-organizer" name="event-organizer" placeholder="Enter organizer name" required>
+            </div>
+            <div class="form-group">
+                <label for="event-category">Event Category</label>
+                <select id="event-category" name="event-category" required>
+                    <option value="">Select category</option>
+                    <option value="conference">Conference</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="webinar">Webinar</option>
+                    <option value="networking">Networking</option>
+                    <option value="networking">Wedding</option>
+                    <option value="networking">Birthday party</option>
+                    <option value="networking">Anniversary</option>
+                    <option value="networking">Fair</option>
+                </select>
+            </div>
+            <a href="{{url_for('list')}}"><input type="submit" value="Create Event" class="button" onclick="showSuccessMessage()"></a>
+        </form>
+
+    <div id="success-message" class="success-message" style="display: none;">
+        <h2>Event Created Successfully!</h2>
+        <p>Your event has been created and saved. You can now view it in your event list.</p>
+    </div>
+</div>
+</div>
+</div>
+ {%include 'footer.html'%}
+<script>
+    function showSuccessMessage() {
+        document.getElementById('event-creator-form').style.display = 'none';
+        document.getElementById('success-message').style.display = 'block';
+    }
+</script>
+</body>
+</html>
+{%endblock%}

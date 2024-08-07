@@ -1,0 +1,109 @@
+ {%extends "base.html" %}
+    {%block title%}EventManager360 Login{%endblock%}
+ {%block content%}
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f06, #ffba00);
+    margin: 0;
+        }
+    .big-box{
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height:100vh;
+margin-top:10%;
+}
+        h2{
+            text-align: center;
+        }
+        .login-container {
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: block;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group .forgot-password {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .link{
+            text-decoration: none;
+            color: #f06;
+        }
+        .button{
+        background-color: #ffba00;
+        background-image: linear-gradient(to right, #f06, #ffba00); /* Gradient background */
+        color: #fff;
+        padding: 14px 24px; /* Increased padding for the button */
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        transition: border 0.1s ease;
+        }
+        .button:hover{
+            border: 2px solid rgb(19, 19, 6);
+        }
+        .flash{
+text-align:center;
+color:red;
+}
+    </style>
+ <div class="big-box">
+    <div class="login-container">
+        <img src="static/assets/logo.png" alt="EventManager360 Logo" class="logo">
+        <h2>EventManager360 Login</h2>
+                {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p class="flash">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="button">
+                <a href="#"class='link'><p class="forgot-password">Forgot Password?</a> | <a href="#" class="link">Register</a></p>
+            </div>
+        </form>
+    </div>
+     </div>
+ {%include 'footer.html'%}
+</body>
+</html>
+{%endblock%}

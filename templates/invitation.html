@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}Invitation Management | EventManager360{% endblock %}
+{% block content %}
+    <style>
+        /* Global styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f06, #ffba00);
+        }
+        .big-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin-top: 10%;
+        }
+        .logo-img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        .invitation-container {
+            max-width: 800px;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .invitation-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .guest-list {
+            margin-bottom: 20px;
+        }
+
+        .guest-list h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .guest-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .guest-list li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .invitation-form {
+            margin-bottom: 20px;
+        }
+
+        .invitation-form label,
+        .invitation-form input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .invitation-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-button {
+            background-color: #ffba00;
+            background-image: linear-gradient(to right, #f06, #ffba00); /* Gradient background */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #409186;
+        }
+
+        .rsvp-tracking {
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .rsvp-tracking h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .rsvp-tracking ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .rsvp-tracking li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+    </style>
+    <div class="big-box">
+
+        <div class="invitation-container">
+            <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="EventManager360 Logo" class="logo-img">
+            <h1 class="logo-text">EventManager360</h1>
+            <h2>Invitation Management</h2>
+
+            <div class="guest-list">
+                <h3>Guest List</h3>
+                <ul id="guest-list">
+                    {% for guest in guests %}
+                        <li>{{ guest.name }} - {{ guest.email }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="invitation-form">
+                <form id="invitation-form" method="post" action="/send_invitation">
+                     <input type="hidden" name="event-id" value="{{ event_id }}">
+                    <label for="guest-name">Guest Name:</label>
+                    <input type="text" id="guest-name" name="guest-name" required>
+
+                    <label for="guest-email">Guest Email:</label>
+                    <input type="email" id="guest-email" name="guest-email" required>
+
+                    <button type="submit" class="submit-button">Send Invitation</button>
+                </form>
+            </div>
+
+            <div class="rsvp-tracking">
+                <h3>RSVP Tracking</h3>
+                <ul id="rsvp-list">
+                    {% for guest in guests %}
+                            <li><strong>{{ guest.name }}</strong> - {{ guest.email }}: <span class="rsvp-status">{{ guest.rsvp|capitalize }}</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+    <script src="scripts.js"></script>
+{% endblock %}

@@ -1,0 +1,168 @@
+ {%extends "base.html" %}
+    {%block title%}About Us | Event Management{%endblock%}
+  {%block content%}
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        #showcase {
+            min-height: 600px;
+            background: url('static/assets/about.jpg') no-repeat center center;
+            background-size: cover;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #showcase h1 {
+            margin-top: 0;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        #showcase p {
+            font-size: 20px;
+        }
+        .content-section {
+            padding: 20px;
+            background: #fff;
+            color: #333;
+        }
+        .content-section h2 {
+            text-align: center;
+        }
+        .content-section p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .team-member {
+            flex: 1;
+            margin: 10px;
+            text-align: center;
+            min-width: 250px;
+        }
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        .team-member h3 {
+            margin: 10px 0 5px 0;
+        }
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            #showcase {
+                min-height: 300px;
+            }
+            #showcase h1 {
+                font-size: 40px;
+            }
+            #showcase p {
+                font-size: 18px;
+            }
+            .team {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        @media (max-width: 480px) {
+            #showcase {
+                min-height: 200px;
+            }
+            #showcase h1 {
+                font-size: 30px;
+            }
+            #showcase p {
+                font-size: 16px;
+            }
+            .content-section h2 {
+                font-size: 24px;
+            }
+            .content-section p {
+                font-size: 16px;
+            }
+        }
+        </style>
+    <section id="showcase">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>Discover Our Story and Meet Our Team</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Our Story</h2>
+            <p>Founded in 2010, Event Management has been delivering exceptional events for over a decade. Our team of dedicated professionals works tirelessly to ensure each event is unique and memorable. From corporate conferences to private celebrations, we handle every detail with precision and care.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Meet Our Team</h2>
+            <div class="team">
+                <div class="team-member">
+                    <img src="static/assets/t2.jpg" alt="Team Member 1">
+                    <h3>Jane Doe</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/assets/t1.jpg" alt="Team Member 2">
+                    <h3>Linda Smith</h3>
+                    <p>Event Coordinator</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/assets/t3.jpg" alt="Team Member 3">
+                    <h3>Emily Johnson</h3>
+                    <p>Marketing Director</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/assets/t4.jpg" alt="Team Member 3">
+                    <h3>Sophia Lee </h3>
+                    <p>Public Relations Specialist</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/assets/t5.jpg" alt="Team Member 3">
+                    <h3>Alexander Smith</h3>
+                    <p>Operations Manager</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/assets/t6.jpg" alt="Team Member 3">
+                    <h3>Olivia Brown</h3>
+                    <p>Event Planner</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/assets/t7.jpg" alt="Team Member 3">
+                    <h3>Jacob Martinez</h3>
+                    <p>Creative Director</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/assets/t8.jpg" alt="Team Member 3">
+                    <h3>Liam Wilson</h3>
+                    <p>Production Manager</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ {%include 'footer.html'%}
+</body>
+</html>
+ {%endblock%}

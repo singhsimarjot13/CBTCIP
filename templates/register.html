@@ -1,0 +1,136 @@
+ {%extends "base.html" %}
+    {%block title%}Register | EventManager360{%endblock%}
+ {%block content%}
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f06, #ffba00);
+    margin:0;
+}
+    .big-box{
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height:100vh;
+margin-top:10%;
+}
+.register-container {
+    background-color: #fff; /* Background color for login container */
+    padding: 30px; /* Padding inside the login container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    width: 600px; /* Width of the login container */
+    max-width: 90%; /* Maximum width */
+    text-align: center;
+    margin:40px;
+}
+
+.register-form h2 {
+    margin-bottom: 20px; /* Space below login header */
+    color: #333; /* Text color */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Space between form groups */
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px; /* Space below labels */
+    color: #333; /* Text color */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px; /* Padding inside input fields */
+    font-size: 16px; /* Text size */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #50b3a2; /* Border color on focus */
+}
+
+.button {
+    background-color: #ffba00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    padding: 12px 24px; /* Padding inside button */
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Text size */
+    transition: background-color 0.3s ease, border 0.2s ease; /* Smooth transitions */
+}
+
+.button:hover {
+    background-color: #ffba00; /* Button background color on hover */
+    border: 1px solid black; /* Border on hover */
+}
+
+.message {
+    text-align: center; /* Center align message */
+    margin-top: 15px; /* Space above message */
+    color: #666; /* Text color */
+}
+
+.message a {
+    text-decoration: none;
+    color: #ffba00; /* Link color */
+}
+
+.message a:hover {
+    text-decoration: underline; /* Underline link on hover */
+}
+
+.flash{
+text-align:center;
+color:red;
+}
+
+    </style>
+<div class="big-box">
+    <div class="register-container">
+        <form id="register-form" class="register-form" action="/register" method="POST">
+            <img src="static/assets/logo.png" alt="EventManager360 Logo" class="logo-img"><br>
+            <h1>EventManager360</h1>
+            <h2>Register</h2>
+                    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p class="flash">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+            <div class="form-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+            </div>
+            <input type="submit" value="Register" class="button">
+            <p class="message">Already have an account? <a href="login.html">Login</a></p>
+        </form>
+    </div>
+    </div>
+  {%include 'footer.html'%}
+</body>
+</html>
+{%endblock%}

@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% block title %}Guest List Management | EventManager360{% endblock %}
+{% block content %}
+<style>
+    /* Global styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #f06, #ffba00);
+    }
+
+    .big-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin-top: 10%;
+    }
+
+    .logo-img {
+        width: 100px;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+
+    .logo-text {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .guest-list-container {
+        max-width: 800px;
+        width: 80%;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .guest-list-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .guest-actions {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .action-btn {
+        background-color: #ffba00;
+        background-image: linear-gradient(to right, #f06, #ffba00); /* Gradient background */
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .action-btn:hover {
+        background-color: #409186;
+    }
+
+    .guest-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .guest-list-item {
+        background-color: #f9f9f9;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .guest-list-item p {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .guest-list-item .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .guest-list-item .action-buttons button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .guest-list-item .action-buttons .edit-btn {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .guest-list-item .action-buttons .edit-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .guest-list-item .action-buttons .delete-btn {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .guest-list-item .action-buttons .delete-btn:hover {
+        background-color: #bd2130;
+    }
+
+    /* Form styles */
+    .guest-form {
+        max-width: 800px;
+        width: 80%;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .guest-form input, .guest-form button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .guest-form button {
+        background-color: #ffba00;
+        background-image: linear-gradient(to right, #f06, #ffba00); /* Gradient background */
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .guest-form button:hover {
+        background-color: #409186;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .logo-text {
+            font-size: 20px;
+        }
+
+        .guest-list-container, .guest-form {
+            padding: 20px;
+        }
+
+        .action-btn, .guest-form input, .guest-form button {
+            padding: 8px 16px;
+        }
+    }
+</style>
+<div class="big-box">
+    <div class="guest-list-container">
+        <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="EventManager360 Logo" class="logo-img">
+        <h1 class="logo-text">EventManager360</h1>
+        <h2>Guest List Management</h2>
+
+        <div class="guest-actions">
+            <button id="add-guest-btn" class="action-btn" onclick="toggleForm()">Add Guest</button>
+        </div>
+
+        <ul class="guest-list" id="guest-list">
+            {% for guest in guest: %}
+            <li class="guest-list-item">
+                <p><strong>{{guest.name}}</strong> - {{guest.email}}</p>
+           <div class="action-buttons">
+            <form action="{{ url_for('delete_guest', guest_id=guest.id) }}" method="POST" style="display:inline;">
+                <button type="submit" class="delete-btn">Delete</button>
+            </form>
+        </div>
+            </li>
+            {%endfor%}
+        </ul>
+    </div>
+
+    <div class="guest-form" id="guest-form" style="display: none;">
+        <form method="POST" action="{{ url_for('guest_list',event_id=current_user.id) }}">
+            <input type="hidden" name="event_id" value="{{ event_id }}">
+            <input type="text" name="name" placeholder="Guest Name" required>
+            <input type="email" name="email" placeholder="Guest Email" required>
+            <button type="submit">Add Guest</button>
+        </form>
+    </div>
+</div>
+{% include 'footer.html' %}
+<script>
+    function toggleForm() {
+        var form = document.getElementById("guest-form");
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+</script>
+{% endblock %}

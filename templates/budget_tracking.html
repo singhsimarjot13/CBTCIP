@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block title %}Budget Tracking | EventManager360{% endblock %}
+
+{% block content %}
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f06, #ffba00);
+            min-height: 100vh;
+        }
+
+        .big-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        a{
+        color:white;
+        text-decoration:none;
+        }
+
+        .logo-img {
+            width: 100px;
+            height:auto;
+            display: block;
+            margin: auto;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        .budget-container {
+            max-width: 1000px;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .budget-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .budget-form {
+            margin-bottom: 20px;
+        }
+
+        .budget-form label,
+        .budget-form input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .budget-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-button {
+          background-color: #ffba00;
+          background-image: linear-gradient(to right, #f06, #ffba00); /* Gradient background */
+           color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #409186;
+        }
+
+        .remove-button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .remove-button:hover {
+            background-color: #c0392b;
+        }
+
+        .budget-list {
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .budget-list h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .budget-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .budget-list li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-budget {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+
+        .total-budget h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #total-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-img {
+                margin-bottom: 10px;
+            }
+
+            .budget-container {
+                padding: 15px;
+            }
+
+            .budget-form input {
+                width: 100%;
+            }
+
+            .submit-button {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
+    <div class="big-box">
+        <div class="budget-container">
+            <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="EventManager360 Logo" class="logo-img">
+            <h1 class="logo-text">EventManager360</h1>
+            <h2>Budget Tracking</h2>
+
+            <div class="budget-form">
+                <form id="budget-form" action="{{ url_for('b_tracking', event_id=event_id) }}" method="POST">
+                    <label for="item-name">Expense Name:</label>
+                    <input type="text" id="item-name" name="item-name" required>
+
+                    <label for="item-cost">Expense Amount (USD):</label>
+                    <input type="number" id="item-cost" name="item-cost" min="0" step="0.01" required>
+
+                    <button type="submit" class="submit-button">Add Expense</button>
+                </form>
+            </div>
+
+            <div class="budget-list">
+                <h3>Expense List</h3>
+                <ul id="expense-list">
+                    <!-- Sample expenses -->
+                    {% for budget in budgets:%}
+                    <li>{{budget.expense_name}}: ${{budget.expense_amount}} <button class="remove-button"><a href="{{url_for('delete',budget_id=budget.id)}}"> Remove</a></button></li>
+                    {%endfor%}
+                </ul>
+            </div>
+
+            <div class="total-budget">
+                <h3>Total Budget</h3>
+                <p id="total-amount">${{total_budget}}</p>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>
+{% endblock %}

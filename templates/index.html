@@ -1,0 +1,123 @@
+
+{%extends "base.html" %}
+{% block content %}
+    <main>
+        <section id="home" class="hero">
+            <div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="static/assets/slide1.jpg" class="d-block w-100 carousel-image" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="static/assets/slide2.jpg" class="d-block w-100 carousel-image" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="static/assets/slide 3.jpg" class="d-block w-100 carousel-image" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Features</h2>
+                <div class="feature-list">
+                    {% if current_user.is_authenticated%}
+                    <div class="feature-item">
+                        <img src="static/assets/event.jpg" alt="">
+                        <h3><a href="{{url_for('event')}}">Event Creation</a></h3>
+                        <p>Create and manage events effortlessly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/guest_list.jpg" alt="">
+                        <h3><a href="{{url_for('list')}}">Guest List Management</a></h3>
+                        <p>Keep track of your guests and RSVPs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/budget.jpg" alt="">
+                        <h3><a href="{{url_for('list')}}">Budget Tracking</a></h3>
+                        <p>Stay within your budget with our tracking tools.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/vendor.png" alt="">
+                        <h3><a href="{{url_for('list')}}">Vendor Coordination</h3>
+                        <p>Coordinate with vendors seamlessly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/schedule.jpg" alt="">
+                        <h3><a href="{{url_for('list')}}">Scheduling</a></h3>
+                        <p>Schedule your events with ease.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/payment.jpg" alt="">
+                        <h3><a href="{{url_for('list')}}">Payment</a></h3>
+                        <p>Facilitate ticket sales and online transactions.</p>
+                        </div>
+                    {%else%}
+                    <div class="feature-item">
+                        <img src="static/assets/create.jpeg" alt="">
+                        <h3><a href="{{url_for('login')}}">Event Creation</a></h3>
+                        <p>Create and manage events effortlessly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/guest_list.jpg" alt="">
+                        <h3><a href="{{url_for('login')}}">Guest List Management</a></h3>
+                        <p>Keep track of your guests and RSVPs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/budget.jpg" alt="">
+                        <h3><a href="{{url_for('login')}}">Budget Tracking</a></h3>
+                        <p>Stay within your budget with our tracking tools.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/vendor.jpg" alt="">
+                        <h3><a href="{{url_for('login')}}">Vendor Coordination</h3>
+                        <p>Coordinate with vendors seamlessly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/schedule.jpg" alt="">
+                        <h3><a href="{{url_for('login')}}">Scheduling</a></h3>
+                        <p>Schedule your events with ease.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="static/assets/payment.jpg" alt="">
+                        <h3><a href="{{url_for('login')}}">Payment</a></h3>
+                        <p>Facilitate ticket sales and online transactions.</p>
+                        </div>
+                    {%endif%}
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>Welcome to EventManager360, your ultimate solution for seamless event management and coordination. Our platform is designed to simplify the complexities of organizing events, providing an intuitive interface for managing users, events, budgets, and guests. Whether you're planning a small gathering or a large corporate function, EventManager360 offers the tools you need to ensure your event runs smoothly. Our goal is to empower event planners with efficient and reliable solutions, enabling them to focus on creating memorable experiences for their clients. With EventManager360, vendor coordination, budget tracking, and guest management become effortless, allowing you to stay on top of every detail. Join us and transform the way you plan and manage events!</p>
+                 <button type="submit" class="btn btn btn-info"><a href="{{url_for('about')}}">About us</a></button>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>We'd love to hear from you! Whether you have questions about our platform, need support, or want to share your feedback, our team at EventManager360 is here to help. You can reach us via email at support@eventmanager360.com or call us at (123) 456-7890. For immediate assistance, our live chat support is available during business hours. Follow us on social media to stay updated with the latest news and features. We look forward to connecting with you and helping you create unforgettable events.</p>
+                <button type="submit" class="btn btn btn-danger"><a href="{{url_for('contact')}}">Contact us</a></button>
+            </div>
+        </section>
+    </main>
+ {%include 'footer.html'%}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+{% endblock %}

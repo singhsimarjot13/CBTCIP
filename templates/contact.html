@@ -1,0 +1,173 @@
+ {%extends "base.html" %}
+    {%block title%}Contact Us | Event Management{%endblock%}
+{%block content%}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width:80%;
+            margin: auto;
+            overflow: hidden;
+        }
+#showcase{
+        min-height: 600px;
+            background: url('static/assets/showcase.jpg') no-repeat center center;
+            background-size: cover;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #showcase h1 {
+            margin-top: 0;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        #showcase p {
+            font-size: 20px;
+        }
+        .content-section {
+            padding: 20px;
+            background:#fff;
+            color: #333;
+        }
+        .content-section h2 {
+            text-align: center;
+        }
+        .content-section p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .content-section .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .content-section .contact-details div {
+            flex: 1;
+            margin: 10px;
+            min-width: 250px;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: auto;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .contact-form button {
+            padding: 10px;
+            background:linear-gradient(135deg, #f06, #ffba00);
+            color: #fff;
+            border: 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            #showcase {
+                min-height: 300px;
+            }
+            #showcase h1 {
+                font-size: 40px;
+            }
+            #showcase p {
+                font-size: 18px;
+            }
+            .content-section .contact-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-form {
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+
+            #showcase {
+                min-height: 200px;
+            }
+            #showcase h1 {
+                font-size: 30px;
+            }
+            #showcase p {
+                font-size: 16px;
+            }
+            .content-section h2 {
+                font-size: 24px;
+            }
+            .content-section p {
+                font-size: 16px;
+            }
+        }
+    </style>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Let's Plan Your Next Event!</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>We would love to hear from you! Whether you have a question, need assistance, or want to discuss your upcoming event, our team is here to help.</p>
+            <div class="contact-details">
+                <div>
+                    <h3>Email</h3>
+                    <p>📧 <a href="mailto:info@eventmanagement.com">info@eventmanagement.com</a></p>
+                </div>
+                <div>
+                    <h3>Phone</h3>
+                    <p>📞 (123) 456-7890</p>
+                </div>
+                <div>
+                    <h3>Office Hours</h3>
+                    <p>🕒 Monday - Friday: 9 AM - 6 PM</p>
+                    <p>🕒 Saturday: 10 AM - 4 PM</p>
+                    <p>🕒 Sunday: Closed</p>
+                </div>
+                <div>
+                    <h3>Office Address</h3>
+                    <p>🏢 123 Event Street, Suite 100<br>Cityville, ST 12345</p>
+                </div>
+            </div>
+            <h2>Contact Form</h2>
+            <form class="contact-form" action="{{url_for('contact')}}" method="post">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="phone" placeholder="Phone" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" placeholder="Message" rows="5" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+            {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p class="flash">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+        </div>
+    </section>
+ {%include 'footer.html'%}
+</body>
+</html>
+{%endblock%}
+

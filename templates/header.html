@@ -1,0 +1,27 @@
+
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='assets/logo.png') }}" class="logo-img" alt="EventManager360 Logo">
+            <h1>EventPlanner360</h1>
+            <nav>
+                <ul>
+                    {% if current_user.is_authenticated:%}
+                    <li><a href="{{url_for('home')}}">Home</a></li>
+                    <li><a href="{{url_for('event')}}">Create</a></li>
+                    <li><a href="{{url_for('list')}}">Event list</a></li>
+                    <li><a href="{{url_for('about')}}">About</a></li>
+                    <li><a href="{{url_for('contact')}}">Contact</a></li>
+                    {%else:%}
+                     <li><a href="{{url_for('login')}}">Home</a></li>
+                    <li><a href="{{url_for('login')}}">Create</a></li>
+                    <li><a href="{{url_for('login')}}">Event list</a></li>
+                    <li><a href="{{url_for('login')}}">About</a></li>
+                    <li><a href="{{url_for('login')}}">Contact</a></li>
+                    <li><a href="{{url_for('login')}}">Login</a></li>
+                    <li><a href="{{url_for('register')}}">Register</a></li>
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
